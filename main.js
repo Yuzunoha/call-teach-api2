@@ -5,13 +5,13 @@ const urlSignIn = 'https://teachapi.herokuapp.com/sign_in';
 const urlUsers = 'https://teachapi.herokuapp.com/users';
 const urlPosts = 'https://teachapi.herokuapp.com/posts';
 
-const onclickButtonSignIn = () => {
-  const name = document.getElementById("singInName").value;
-  const bio = document.getElementById("singInBio").value;
-  const email = document.getElementById("singInEmail").value;
-  const password = document.getElementById("singInPassword").value;
-  const passwordConfirmation = document.getElementById("singInPasswordConfirmation").value;
-  const body = {
+const onclickButtonSignUp = () => {
+  const name = document.getElementById("signUpName").value;
+  const bio = document.getElementById("signUpBio").value;
+  const email = document.getElementById("signUpEmail").value;
+  const password = document.getElementById("signUpPassword").value;
+  const passwordConfirmation = document.getElementById("signUpPasswordConfirmation").value;
+  const bodyObj = {
     "sign_up_user_params": {
       "name": name,
       "bio": bio,
@@ -20,6 +20,14 @@ const onclickButtonSignIn = () => {
       "password_confirmation": passwordConfirmation
     }
   }
-  console.log(body);
+  const method = "POST";
+  const body = JSON.stringify(bodyObj);
+  const headers = {
+    'Content-Type': 'application/json'
+  };
+  fetch(urlSignUp, { method, headers, body })
+    .then((res) => res.json())
+    .then(console.log)
+    .catch(console.error);
 }
 
