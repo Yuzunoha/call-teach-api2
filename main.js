@@ -121,3 +121,21 @@ const onclickButtonUsersPut = () => {
     })
     .catch(console.error);
 };
+
+const onclickButtonUsersDelete = () => {
+  const id = document.getElementById('usersDeleteId').value;
+  const method = 'DELETE';
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + localStorage.token
+  };
+  fetch(`${urlUsers}/${id}`, {
+    method,
+    headers
+  })
+    .then(res => res.json())
+    .then(resJson => {
+      console.log(resJson);
+    })
+    .catch(console.error);
+};
