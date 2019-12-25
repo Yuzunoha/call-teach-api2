@@ -93,3 +93,31 @@ const onclickButtonUsersGet = () => {
     })
     .catch(console.error);
 };
+
+const onclickButtonUsersPut = () => {
+  const id = document.getElementById('usersPutId').value;
+  const name = document.getElementById('usersPutName').value;
+  const bio = document.getElementById('usersPutBio').value;
+  const bodyObj = {
+    user_params: {
+      name,
+      bio
+    }
+  };
+  const method = 'PUT';
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + localStorage.token
+  };
+  const body = JSON.stringify(bodyObj);
+  fetch(`${urlUsers}/${id}`, {
+    method,
+    headers,
+    body
+  })
+    .then(res => res.json())
+    .then(resJson => {
+      console.log(resJson);
+    })
+    .catch(console.error);
+};
