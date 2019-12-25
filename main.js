@@ -29,7 +29,33 @@ const onclickButtonSignUp = () => {
     .then((res) => res.json())
     .then(resJson => {
       console.log(resJson)
-      // 今サインアップしたユーザのトークンを保存する
+      // 返却されたトークンを保存する
+      localStorage.token = resJson.token;
+    })
+    .catch(console.error);
+}
+
+const onclickButtonSignIn = () => {
+  const email = document.getElementById("signInEmail").value;
+  const password = document.getElementById("signInPassword").value;
+  const passwordConfirmation = document.getElementById("signInPasswordConfirmation").value;
+  const bodyObj = {
+    "sign_in_user_params": {
+      "email": email,
+      "password": password,
+      "password_confirmation": passwordConfirmation
+    }
+  }
+  const method = "POST";
+  const body = JSON.stringify(bodyObj);
+  const headers = {
+    'Content-Type': 'application/json'
+  };
+  fetch(urlSignIn, { method, headers, body })
+    .then((res) => res.json())
+    .then(resJson => {
+      console.log(resJson)
+      // 返却されたトークンを保存する
       localStorage.token = resJson.token;
     })
     .catch(console.error);
