@@ -27,7 +27,10 @@ const onclickButtonSignUp = () => {
   };
   fetch(urlSignUp, { method, headers, body })
     .then((res) => res.json())
-    .then(console.log)
+    .then(resJson => {
+      console.log(resJson)
+      // 今サインアップしたユーザのトークンを保存する
+      localStorage.token = resJson.token;
+    })
     .catch(console.error);
 }
-
