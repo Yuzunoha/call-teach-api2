@@ -155,7 +155,6 @@ const onclickButtonUsersTimeline = () => {
     'Content-Type': 'application/json',
     Authorization: 'Bearer ' + localStorage.token
   };
-
   fetch(`${urlUsers}/${id}/timeline?${qs}`, {
     method,
     headers
@@ -192,3 +191,27 @@ const onclickButtonPostsPost = () => {
     .catch(console.error);
 };
 
+const onclickButtonPostsGet = () => {
+  const page = document.getElementById('postsGetPage').value;
+  const limit = document.getElementById('postsGetLimit').value;
+  const query = document.getElementById('postsGetQuery').value;
+  const qs = new URLSearchParams({
+    page,
+    limit,
+    query
+  });
+  const method = 'GET';
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + localStorage.token
+  };
+  fetch(`${urlPosts}?${qs}`, {
+    method,
+    headers
+  })
+    .then(res => res.json())
+    .then(resJson => {
+      console.log(resJson);
+    })
+    .catch(console.error);
+};
