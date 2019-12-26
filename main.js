@@ -139,3 +139,31 @@ const onclickButtonUsersDelete = () => {
     })
     .catch(console.error);
 };
+
+const onclickButtonUsersTimeline = () => {
+  const id = document.getElementById('usersTimelineId').value;
+  const page = document.getElementById('usersTimelinePage').value;
+  const limit = document.getElementById('usersTimelineLimit').value;
+  const query = document.getElementById('usersTimelineQuery').value;
+  const qs = new URLSearchParams({
+    page,
+    limit,
+    query
+  });
+  const method = 'GET';
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + localStorage.token
+  };
+
+  fetch(`${urlUsers}/${id}/timeline?${qs}`, {
+    method,
+    headers
+  })
+    .then(res => res.json())
+    .then(resJson => {
+      console.log(resJson);
+    })
+    .catch(console.error);
+};
+
