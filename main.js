@@ -167,3 +167,28 @@ const onclickButtonUsersTimeline = () => {
     .catch(console.error);
 };
 
+const onclickButtonPostsPost = () => {
+  const text = document.getElementById('PostsPostText').value;
+  const bodyObj = {
+    "post_params": {
+      text
+    }
+  };
+  const method = 'POST';
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + localStorage.token
+  };
+  const body = JSON.stringify(bodyObj);
+  fetch(urlPosts, {
+    method,
+    headers,
+    body
+  })
+    .then(res => res.json())
+    .then(resJson => {
+      console.log(resJson);
+    })
+    .catch(console.error);
+};
+
