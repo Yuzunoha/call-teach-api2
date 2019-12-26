@@ -191,6 +191,32 @@ const onclickButtonPostsPost = () => {
     .catch(console.error);
 };
 
+const onclickButtonPostsPut = () => {
+  const id = document.getElementById('postsPutId').value;
+  const text = document.getElementById('postsPutText').value;
+  const bodyObj = {
+    "post_params": {
+      text
+    }
+  };
+  const method = 'PUT';
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + localStorage.token
+  };
+  const body = JSON.stringify(bodyObj);
+  fetch(`${urlPosts}/${id}`, {
+    method,
+    headers,
+    body
+  })
+    .then(res => res.json())
+    .then(resJson => {
+      console.log(resJson);
+    })
+    .catch(console.error);
+};
+
 const onclickButtonPostsGet = () => {
   const page = document.getElementById('postsGetPage').value;
   const limit = document.getElementById('postsGetLimit').value;
