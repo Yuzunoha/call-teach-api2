@@ -217,6 +217,24 @@ const onclickButtonPostsPut = () => {
     .catch(console.error);
 };
 
+const onclickButtonPostsDelete = () => {
+  const id = document.getElementById('postsDeleteId').value;
+  const method = 'DELETE';
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + localStorage.token
+  };
+  fetch(`${urlPosts}/${id}`, {
+    method,
+    headers
+  })
+    .then(res => res.json())
+    .then(resJson => {
+      console.log(resJson);
+    })
+    .catch(console.error);
+};
+
 const onclickButtonPostsGet = () => {
   const page = document.getElementById('postsGetPage').value;
   const limit = document.getElementById('postsGetLimit').value;
