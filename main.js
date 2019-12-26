@@ -167,7 +167,7 @@ const onclickButtonUsersTimeline = () => {
 };
 
 const onclickButtonPostsPost = () => {
-  const text = document.getElementById('PostsPostText').value;
+  const text = document.getElementById('postsPostText').value;
   const bodyObj = {
     "post_params": {
       text
