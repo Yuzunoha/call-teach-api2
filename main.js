@@ -32,6 +32,24 @@ const updateLocalStorageProfile = (obj) => {
   localStorage.updated_at = obj.updated_at;
 };
 
+const fetchWrap = (url, method, body = null) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + localStorage.token
+  };
+  const options = { method, headers };
+  if (body) {
+    options.body = JSON.stringify(body);
+  }
+  return fetch(url, options)
+    .then(res => res.json())
+    .then(resJson => {
+      console.log(resJson);
+      return resJson;
+    })
+    .catch(console.error);
+};
+
 const onclickButtonSignUp = () => {
   const name = document.getElementById('signUpName').value;
   const bio = document.getElementById('signUpBio').value;
@@ -47,24 +65,12 @@ const onclickButtonSignUp = () => {
       password_confirmation: passwordConfirmation
     }
   };
-  const method = 'POST';
-  const body = JSON.stringify(bodyObj);
-  const headers = {
-    'Content-Type': 'application/json'
-  };
-  fetch(urlSignUp, {
-    method,
-    headers,
-    body
-  })
-    .then(res => res.json())
+  fetchWrap(urlSignUp, 'POST', bodyObj)
     .then(resJson => {
-      console.log(resJson);
       // 返却されたトークンを保存する
       updateLocalStorageProfile(resJson);
       updateProfileTagByLocalStorage();
-    })
-    .catch(console.error);
+    });
 };
 
 const onclickButtonSignIn = () => {
