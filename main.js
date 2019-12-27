@@ -84,24 +84,11 @@ const onclickButtonSignIn = () => {
       password_confirmation: passwordConfirmation
     }
   };
-  const method = 'POST';
-  const body = JSON.stringify(bodyObj);
-  const headers = {
-    'Content-Type': 'application/json'
-  };
-  fetch(urlSignIn, {
-    method,
-    headers,
-    body
-  })
-    .then(res => res.json())
-    .then(resJson => {
-      console.log(resJson);
-      // 返却されたトークンを保存する
+  fetchWrap(urlSignIn, 'POST', bodyObj)
+    .then((resJson) => {
       updateLocalStorageProfile(resJson);
       updateProfileTagByLocalStorage();
-    })
-    .catch(console.error);
+    });
 };
 
 const onclickButtonUsersGet = () => {
