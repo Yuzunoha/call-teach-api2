@@ -5,6 +5,24 @@ const urlSignIn = 'https://teachapi.herokuapp.com/sign_in';
 const urlUsers = 'https://teachapi.herokuapp.com/users';
 const urlPosts = 'https://teachapi.herokuapp.com/posts';
 
+const updateLocalStorageProfile = (obj) => {
+  localStorage.id = obj.id;
+  localStorage.name = obj.name;
+  localStorage.bio = obj.bio;
+  localStorage.token = obj.token;
+  localStorage.email = obj.email;
+  localStorage.created_at = obj.created_at;
+  localStorage.updated_at = obj.updated_at;
+};
+
+const updateProfile = () => {
+  const profile = document.getElementById('profile');
+  let s = '';
+  s += '';
+};
+
+updateProfile();
+
 const onclickButtonSignUp = () => {
   const name = document.getElementById('signUpName').value;
   const bio = document.getElementById('signUpBio').value;
@@ -34,7 +52,7 @@ const onclickButtonSignUp = () => {
     .then(resJson => {
       console.log(resJson);
       // 返却されたトークンを保存する
-      localStorage.token = resJson.token;
+      updateLocalStorageProfile(resJson);
     })
     .catch(console.error);
 };
@@ -64,7 +82,9 @@ const onclickButtonSignIn = () => {
     .then(resJson => {
       console.log(resJson);
       // 返却されたトークンを保存する
-      localStorage.token = resJson.token;
+      console.log('sign in');
+      console.log(resJson);
+      updateLocalStorageProfile(resJson);
     })
     .catch(console.error);
 };
