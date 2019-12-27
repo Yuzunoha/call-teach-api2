@@ -288,3 +288,39 @@ const onclickButtonPostsGet = () => {
     })
     .catch(console.error);
 };
+
+const onclickButtonFollowPost = () => {
+  const id = document.getElementById('followPostId').value;
+  const method = 'POST';
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + localStorage.token
+  };
+  fetch(`${urlUsers}/${id}/follow`, {
+    method,
+    headers
+  })
+    .then(res => res.json())
+    .then(resJson => {
+      console.log(resJson);
+    })
+    .catch(console.error);
+};
+
+const onclickButtonFollowDelete = () => {
+  const id = document.getElementById('followDeleteId').value;
+  const method = 'DELETE';
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + localStorage.token
+  };
+  fetch(`${urlUsers}/${id}/follow`, {
+    method,
+    headers
+  })
+    .then(res => res.json())
+    .then(resJson => {
+      console.log(resJson);
+    })
+    .catch(console.error);
+};
