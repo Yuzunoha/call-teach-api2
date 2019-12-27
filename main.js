@@ -32,7 +32,7 @@ const updateLocalStorageProfile = (obj) => {
   localStorage.updated_at = obj.updated_at;
 };
 
-const fetchWrap = (url, method, body = null) => {
+const fetchWrap = (url, method = 'GET', body = null) => {
   const headers = {
     'Content-Type': 'application/json',
     Authorization: 'Bearer ' + localStorage.token
@@ -95,25 +95,12 @@ const onclickButtonUsersGet = () => {
   const page = document.getElementById('usersGetPage').value;
   const limit = document.getElementById('usersGetLimit').value;
   const query = document.getElementById('usersGetQuery').value;
-  const method = 'GET';
   const qs = new URLSearchParams({
     page,
     limit,
     query
   });
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + localStorage.token
-  };
-  fetch(`${urlUsers}?${qs}`, {
-    method,
-    headers
-  })
-    .then(res => res.json())
-    .then(resJson => {
-      console.log(resJson);
-    })
-    .catch(console.error);
+  fetchWrap(`${urlUsers}?${qs}`);
 };
 
 const onclickButtonUsersPut = () => {
