@@ -5,6 +5,23 @@ const urlSignIn = 'https://teachapi.herokuapp.com/sign_in';
 const urlUsers = 'https://teachapi.herokuapp.com/users';
 const urlPosts = 'https://teachapi.herokuapp.com/posts';
 
+const updateProfileTagByLocalStorage = () => {
+  const profileTag = document.getElementById('profile');
+  let s = '';
+  s += '<table border>';
+  s += '<tr><th>id</th><th>name</th><th>bio</th><th>email</th><th>created_at</th><th>updated_at</th></tr>';
+  s += '<tr>';
+  s += `<td>${localStorage.id}</td><td>${localStorage.name}</td>`;
+  s += `<td>${localStorage.bio}</td><td>${localStorage.email}</td>`;
+  s += `<td>${localStorage.created_at}</td><td>${localStorage.updated_at}</td>`;
+  s += '</tr>';
+  s += '</table>';
+  profileTag.innerHTML = s;
+};
+
+// ブラウザ更新時にプロフィール欄を更新する
+updateProfileTagByLocalStorage();
+
 const updateLocalStorageProfile = (obj) => {
   localStorage.id = obj.id;
   localStorage.name = obj.name;
@@ -14,14 +31,6 @@ const updateLocalStorageProfile = (obj) => {
   localStorage.created_at = obj.created_at;
   localStorage.updated_at = obj.updated_at;
 };
-
-const updateProfile = () => {
-  const profile = document.getElementById('profile');
-  let s = '';
-  s += '';
-};
-
-updateProfile();
 
 const onclickButtonSignUp = () => {
   const name = document.getElementById('signUpName').value;
@@ -53,6 +62,7 @@ const onclickButtonSignUp = () => {
       console.log(resJson);
       // 返却されたトークンを保存する
       updateLocalStorageProfile(resJson);
+      updateProfileTagByLocalStorage();
     })
     .catch(console.error);
 };
@@ -82,9 +92,8 @@ const onclickButtonSignIn = () => {
     .then(resJson => {
       console.log(resJson);
       // 返却されたトークンを保存する
-      console.log('sign in');
-      console.log(resJson);
       updateLocalStorageProfile(resJson);
+      updateProfileTagByLocalStorage();
     })
     .catch(console.error);
 };
