@@ -173,20 +173,7 @@ const onclickButtonPostsGet = () => {
     limit,
     query
   });
-  const method = 'GET';
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + localStorage.token
-  };
-  fetch(`${urlPosts}?${qs}`, {
-    method,
-    headers
-  })
-    .then(res => res.json())
-    .then(resJson => {
-      console.log(resJson);
-    })
-    .catch(console.error);
+  fetchWrap(`${urlPosts}?${qs}`);
 };
 
 const onclickButtonFollowPost = () => {
