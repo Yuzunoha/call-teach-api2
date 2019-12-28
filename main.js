@@ -111,7 +111,10 @@ const onclickButtonUsersPut = () => {
       bio
     }
   };
-  fetchWrap(`${urlUsers}/${id}`, 'PUT', bodyObj);
+  fetchWrap(`${urlUsers}/${id}`, 'PUT', bodyObj).then(resJson => {
+    updateLocalStorageProfile(resJson);
+    updateProfileTagByLocalStorage();
+  });
 };
 
 const onclickButtonUsersDelete = () => {
