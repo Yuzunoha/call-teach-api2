@@ -22,7 +22,7 @@ const updateProfileTagByLocalStorage = () => {
 // ブラウザ更新時にプロフィール欄を更新する
 updateProfileTagByLocalStorage();
 
-const updateLocalStorageProfile = (obj) => {
+const updateLocalStorageProfile = obj => {
   localStorage.id = obj.id;
   localStorage.name = obj.name;
   localStorage.bio = obj.bio;
@@ -65,12 +65,11 @@ const onclickButtonSignUp = () => {
       password_confirmation: passwordConfirmation
     }
   };
-  fetchWrap(urlSignUp, 'POST', bodyObj)
-    .then(resJson => {
-      // 返却されたトークンを保存する
-      updateLocalStorageProfile(resJson);
-      updateProfileTagByLocalStorage();
-    });
+  fetchWrap(urlSignUp, 'POST', bodyObj).then(resJson => {
+    // 返却されたトークンを保存する
+    updateLocalStorageProfile(resJson);
+    updateProfileTagByLocalStorage();
+  });
 };
 
 const onclickButtonSignIn = () => {
@@ -84,11 +83,10 @@ const onclickButtonSignIn = () => {
       password_confirmation: passwordConfirmation
     }
   };
-  fetchWrap(urlSignIn, 'POST', bodyObj)
-    .then((resJson) => {
-      updateLocalStorageProfile(resJson);
-      updateProfileTagByLocalStorage();
-    });
+  fetchWrap(urlSignIn, 'POST', bodyObj).then(resJson => {
+    updateLocalStorageProfile(resJson);
+    updateProfileTagByLocalStorage();
+  });
 };
 
 const onclickButtonUsersGet = () => {
@@ -178,7 +176,7 @@ const onclickButtonUsersTimeline = () => {
 const onclickButtonPostsPost = () => {
   const text = document.getElementById('postsPostText').value;
   const bodyObj = {
-    "post_params": {
+    post_params: {
       text
     }
   };
@@ -204,7 +202,7 @@ const onclickButtonPostsPut = () => {
   const id = document.getElementById('postsPutId').value;
   const text = document.getElementById('postsPutText').value;
   const bodyObj = {
-    "post_params": {
+    post_params: {
       text
     }
   };
