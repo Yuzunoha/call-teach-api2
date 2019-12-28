@@ -32,6 +32,11 @@ const updateLocalStorageProfile = obj => {
   localStorage.updated_at = obj.updated_at;
 };
 
+const updateLocalStorageAndProfileTag = resJson => {
+  updateLocalStorageProfile(resJson);
+  updateProfileTagByLocalStorage();
+};
+
 const fetchWrap = (url, method = 'GET', body = null) => {
   const headers = {
     'Content-Type': 'application/json',
@@ -65,11 +70,7 @@ const onclickButtonSignUp = () => {
       password_confirmation: passwordConfirmation
     }
   };
-  fetchWrap(urlSignUp, 'POST', bodyObj).then(resJson => {
-    // 返却されたトークンを保存する
-    updateLocalStorageProfile(resJson);
-    updateProfileTagByLocalStorage();
-  });
+  fetchWrap(urlSignUp, 'POST', bodyObj).then(updateLocalStorageAndProfileTag);
 };
 
 const onclickButtonSignIn = () => {
@@ -83,10 +84,7 @@ const onclickButtonSignIn = () => {
       password_confirmation: passwordConfirmation
     }
   };
-  fetchWrap(urlSignIn, 'POST', bodyObj).then(resJson => {
-    updateLocalStorageProfile(resJson);
-    updateProfileTagByLocalStorage();
-  });
+  fetchWrap(urlSignIn, 'POST', bodyObj).then(updateLocalStorageAndProfileTag);
 };
 
 const onclickButtonUsersGet = () => {
@@ -111,18 +109,12 @@ const onclickButtonUsersPut = () => {
       bio
     }
   };
-  fetchWrap(`${urlUsers}/${id}`, 'PUT', bodyObj).then(resJson => {
-    updateLocalStorageProfile(resJson);
-    updateProfileTagByLocalStorage();
-  });
+  fetchWrap(`${urlUsers}/${id}`, 'PUT', bodyObj).then(updateLocalStorageAndProfileTag);
 };
 
 const onclickButtonUsersDelete = () => {
   const id = document.getElementById('usersDeleteId').value;
-  fetchWrap(`${urlUsers}/${id}`, 'DELETE').then(resJson => {
-    updateLocalStorageProfile(resJson);
-    updateProfileTagByLocalStorage();
-  });
+  fetchWrap(`${urlUsers}/${id}`, 'DELETE').then(updateLocalStorageAndProfileTag);
 };
 
 const onclickButtonUsersTimeline = () => {
