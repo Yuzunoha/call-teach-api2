@@ -111,22 +111,7 @@ const onclickButtonUsersPut = () => {
       bio
     }
   };
-  const method = 'PUT';
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + localStorage.token
-  };
-  const body = JSON.stringify(bodyObj);
-  fetch(`${urlUsers}/${id}`, {
-    method,
-    headers,
-    body
-  })
-    .then(res => res.json())
-    .then(resJson => {
-      console.log(resJson);
-    })
-    .catch(console.error);
+  fetchWrap(`${urlUsers}/${id}`, 'PUT', bodyObj);
 };
 
 const onclickButtonUsersDelete = () => {
