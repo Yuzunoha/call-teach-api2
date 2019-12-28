@@ -46,6 +46,14 @@ const fetchWrap = (url, method = 'GET', body = null) => {
   if (body) {
     options.body = JSON.stringify(body);
   }
+
+  /* log出力 */
+  console.log('fetchWrap() url : ');
+  console.log(url);
+  console.log('fetchWrap() options : ');
+  console.log(options);
+  console.log('fetchWrap() response : ');
+
   return fetch(url, options)
     .then(res => res.json())
     .then(resJson => {
