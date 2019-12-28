@@ -127,20 +127,7 @@ const onclickButtonUsersTimeline = () => {
     limit,
     query
   });
-  const method = 'GET';
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + localStorage.token
-  };
-  fetch(`${urlUsers}/${id}/timeline?${qs}`, {
-    method,
-    headers
-  })
-    .then(res => res.json())
-    .then(resJson => {
-      console.log(resJson);
-    })
-    .catch(console.error);
+  fetchWrap(`${urlUsers}/${id}/timeline?${qs}`);
 };
 
 const onclickButtonPostsPost = () => {
