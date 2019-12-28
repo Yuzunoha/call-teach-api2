@@ -137,22 +137,7 @@ const onclickButtonPostsPost = () => {
       text
     }
   };
-  const method = 'POST';
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + localStorage.token
-  };
-  const body = JSON.stringify(bodyObj);
-  fetch(urlPosts, {
-    method,
-    headers,
-    body
-  })
-    .then(res => res.json())
-    .then(resJson => {
-      console.log(resJson);
-    })
-    .catch(console.error);
+  fetchWrap(urlPosts, 'POST', bodyObj);
 };
 
 const onclickButtonPostsPut = () => {
